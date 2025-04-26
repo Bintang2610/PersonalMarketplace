@@ -1,10 +1,8 @@
 import { Suspense, type Component } from 'solid-js';
-import { A, useLocation } from '@solidjs/router';
+import { A, useNavigate } from '@solidjs/router';
 import { createSignal, onCleanup, onMount } from "solid-js";
 
 const App: Component = (props: { children: Element }) => {
-  const location = useLocation();
-
   const [isOpen, setIsOpen] = createSignal(false);
 
   const toggleMobileMenu = () => {
@@ -36,6 +34,16 @@ const App: Component = (props: { children: Element }) => {
 
   const [showText3, setShowText3] = createSignal(false);
 
+  const navigate = useNavigate();
+
+  const goToKatalogAndFocus = () => {
+    navigate('/katalog');
+    setTimeout(() => {
+      const input = document.getElementById('searchInput');
+      if (input) input.focus();
+    }, 100); // kasih jeda sedikit biar halaman sempat load
+  };
+
   return (
     <>
       <nav class={`bg-white fixed w-full z-30 top-0 start-0 border-b border-gray-200 transition-transform duration-300 ${
@@ -51,7 +59,7 @@ const App: Component = (props: { children: Element }) => {
                 <A href="/" class="hover:text-gray-600 hover:underline text-black text-sm">Terbaru</A>
               </li>
               <li>
-                <A href="/" class="hover:text-gray-600 hover:underline text-black text-sm">Katalog</A>
+                <A href="/katalog" class="hover:text-gray-600 hover:underline text-black text-sm">Katalog</A>
               </li>
               <li>
                 <A href="/" class="hover:text-gray-600 hover:underline text-black text-sm">Pria</A>
@@ -62,9 +70,9 @@ const App: Component = (props: { children: Element }) => {
             </ul>
           </div>
           <div class="flex items-center space-x-3 z-10">
-            <A href="/profil" class="flex items-center rounded-full px-2 py-2 hover:bg-gray-100 bg-white justify-center text-black text-md">
+            <button onClick={goToKatalogAndFocus} class="flex items-center rounded-full px-2 py-2 hover:bg-gray-100 bg-white justify-center text-black text-md">
               <i class="fa-solid fa-magnifying-glass"></i>
-            </A>
+            </button>
             <A href="/profil" class="flex items-center rounded-full px-2 py-2 hover:bg-gray-100 bg-white justify-center text-black text-md">
               <i class="fa-regular fa-heart"></i>
             </A>
@@ -76,10 +84,13 @@ const App: Component = (props: { children: Element }) => {
             </button>
           </div>
         </div>
-        <div class={`md:hidden ${isOpen() ? '' : 'hidden'} bg-white border-t border-gray-200 px-4 py-2`}>
-            <ul class="space-y-4 text-sm font-medium text-gray-700">
-                <li>Katalog</li>
-            </ul>
+        <div class={`md:hidden ${isOpen() ? '' : 'hidden'} w-full bg-white border-t border-gray-200 px-4 py-2`}>
+            <div class="w-full flex flex-col text-sm font-medium text-gray-700">
+            <A href="" onClick={toggleMobileMenu} class="w-full py-4 px-4">Terbaru</A>
+            <A href="/katalog" onClick={toggleMobileMenu} class="w-full py-4 px-4 border-t border-gray-200">Katalog</A>
+            <A href="" onClick={toggleMobileMenu} class="w-full py-4 px-4 border-t border-gray-200">Pria</A>
+            <A href="" onClick={toggleMobileMenu} class="w-full py-4 px-4 border-t border-gray-200">Wanita</A>
+            </div>
         </div>
       </nav>
 
@@ -88,7 +99,7 @@ const App: Component = (props: { children: Element }) => {
       </main>
 
       <footer class="border-t border-gray-300">
-        <div class="flex flex-col md:space-x-4 md:flex-row text-black px-8 py-8 text-sm text-gray-700">
+        <div class="flex flex-col md:space-x-4 md:flex-row text-black px-8 md:px-10 py-8 text-sm text-gray-700">
           <div class="w-auto md:w-1/4 mb-2 flex-col">
             <div class="flex items-center justify-between cursor-pointer md:cursor-default" onClick={() => setShowText(!showText())}>
               <p class="flex items-center text-lg font-medium py-4">
@@ -165,7 +176,7 @@ const App: Component = (props: { children: Element }) => {
             <p class="flex items-center justify-end text-lg font-medium py-4"><i class="fa-solid fa-globe mr-2"></i>Indonesia</p>
           </div>
         </div>
-        <div class="w-full px-8 py-8">
+        <div class="w-full px-8 md:px-10 py-8">
           <div class="w-auto flex py-4 flex-row space-x-6 text-sm text-black">
             <A href="" class="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-5 text-black inline-block mr-1">

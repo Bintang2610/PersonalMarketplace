@@ -2,7 +2,6 @@ import { createSignal, onMount } from 'solid-js';
 import { A, useLocation } from '@solidjs/router';
 
 export default function Home() {
-  const [count, setCount] = createSignal(0);
 
   let revealDiv: HTMLDivElement | undefined;
 
@@ -40,6 +39,25 @@ export default function Home() {
     );
 
     if (revealDiv2) observer.observe(revealDiv2);
+  });
+
+  let revealDiv3: HTMLDivElement | undefined;
+
+  onMount(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && revealDiv3) {
+            revealDiv3.classList.remove('opacity-0', 'translate-x-0');
+            revealDiv3.classList.add('opacity-100', 'translate-x-10');
+            observer.unobserve(entry.target); // Berhenti observe setelah muncul
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    if (revealDiv3) observer.observe(revealDiv3);
   });
 
   let revealSec1: HTMLDivElement | undefined;
@@ -125,21 +143,26 @@ export default function Home() {
   }));
 
   return (
-    <section class="mx-8 md:mx-10 mt-20">
-    <A href="block"
-      class="relative w-full h-[100vh] bg-cover bg-center md:bg-top flex items-center group"
-      style="background-image: url('/src/public/images/mockup/13.png');"
-    >
-      <div class="absolute inset-0 bg-black/5 transition-opacity duration-300 group-hover:opacity-0"></div>
+    <section class="mx-8 md:mx-10">
+    <div class="pt-20 pb-6 h-[100vh] flex flex-col">
+      <A href=""
+        class="relative w-full flex-1 bg-cover bg-center md:bg-top flex items-center group"
+        style="background-image: url('/src/public/images/mockup/13.png');"
+      >
+        <div class="absolute inset-0 bg-black/5 transition-opacity duration-300 group-hover:opacity-0"></div>
 
-      <div class="w-full max-w-sm md:max-w-sm lg:max-w-md ml-6 md:ml-20 lg:ml-32 p-4 rounded text-white font-medium">
-        <h2 class="w-full mb-1 text-3xl lg:text-4xl font-medium lg:font-semibold">Hoodie terbaru dari Personal Store</h2>
-        <p class="mb-2 text-md">Hoodie 1.1</p>
-        <A href="/" class=" text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <div class="flex items-center w-20 px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full"><i class="fa-solid fa-bag-shopping mr-1"></i> Shop</div>
-        </A>
-      </div>
-    </A>
+        <div ref={revealDiv3} class="opacity-0 translate-x-0 transition-all duration-700 overflow-x-auto w-full max-w-sm md:max-w-sm lg:max-w-md ml-2 md:ml-16 lg:ml-32 rounded text-white font-medium">
+          <h2 class="w-full mb-1 text-3xl lg:text-4xl font-medium lg:font-semibold">Hoodie terbaru dari Personal Store</h2>
+          <p class="mb-2 text-md">Hoodie 1.1</p>
+          <A href="/" class=" text-sm block md:hidden">
+            <div class="flex items-center w-20 px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full"><i class="fa-solid fa-bag-shopping mr-1"></i> Shop</div>
+          </A>
+          <A href="/" class=" text-sm hidden md:block opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div class="flex items-center w-20 px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full"><i class="fa-solid fa-bag-shopping mr-1"></i> Shop</div>
+          </A>
+        </div>
+      </A>
+    </div>
     <div
       class="relative w-full h-[655px] flex justify-center items-center"
     >
@@ -204,13 +227,20 @@ export default function Home() {
       class="relative w-full h-[90vh] mb-12 bg-cover bg-center md:bg-top text-center justify-center flex items-center group"
       style="background-image: url('/src/public/images/mockup/10.png');"
     >
-      <div class="absolute z-0 inset-0 bg-black/15 transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
+      <div class="absolute z-0 inset-0 bg-black/15"></div>
 
-      <div class="w-full z-10 max-w-sm md:max-w-sm lg:max-w-md p-4 rounded text-white font-medium transition-opacity opacity-0 duration-300 group-hover:opacity-100">
+      <div class="w-full z-10 max-w-sm md:max-w-sm lg:max-w-md p-4 rounded text-white font-medium">
         <h2 class="w-full mb-2 text-3xl lg:text-4xl font-medium lg:font-semibold">Cari hoodie favoritmu di Personal Store</h2>
-          <A href="/" class="text-sm justify-center text-center flex">
-            <div class="flex items-center px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Kunjungi laman <i class="fa-solid fa-arrow-right ml-2"></i></div>
-          </A>
+          <div class="hidden md:block">
+            <A href="/" class="text-sm justify-center text-center flex transition-opacity opacity-0 duration-300 group-hover:opacity-100">
+              <div class="flex items-center px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Kunjungi laman <i class="fa-solid fa-arrow-right ml-2"></i></div>
+            </A>
+          </div>
+          <div class="block md:hidden">
+            <A href="/" class="text-sm justify-center text-center flex">
+              <div class="flex items-center px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Kunjungi laman <i class="fa-solid fa-arrow-right ml-2"></i></div>
+            </A>
+          </div>
       </div>
     </A>
     <div class="flex mb-12">
@@ -222,8 +252,11 @@ export default function Home() {
 
         <div ref={revealSec1} class="transition-all duration-700 ease-out transform opacity-0 translate-x-0 w-full max-w-[110px] md:max-w-sm lg:max-w-md ml-none md:ml-8 lg:ml-16 py-4 rounded text-white font-medium">
           <h2 class="w-full text-shadow-lg mb-2 text-3xl lg:text-4xl font-medium lg:font-semibold">Pilihan Pria</h2>
-          <A href="/" class="text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <A href="/" class="text-sm hidden md:block opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <div class="flex items-center w-40 text-center justify-center mb-20 px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Kunjungi laman <i class="fa-solid fa-arrow-right ml-2"></i></div>
+          </A>
+          <A href="/" class="text-sm block md:hidden">
+            <div class="flex items-center w-20 text-center justify-center mb-20 px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Lihat <i class="fa-solid fa-arrow-right ml-2"></i></div>
           </A>
         </div>
       </A>
@@ -235,8 +268,11 @@ export default function Home() {
 
         <div ref={revealSec2} class="transition-all duration-700 ease-out transform opacity-0 translate-x-0 w-full max-w-[110px] md:max-w-sm lg:max-w-md ml-none md:ml-8 lg:ml-16 py-4 rounded text-white font-medium">
           <h2 class="w-full text-shadow-lg mt-20 mb-2 text-3xl lg:text-4xl font-medium lg:font-semibold">Pilihan Wanita</h2>
-          <A href="/" class="text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <div class="flex items-center w-40 text-center justify-center px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Kunjungi laman <i class="fa-solid fa-arrow-right ml-2"></i></div>
+          <A href="/" class="text-sm hidden md:block opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div class="flex items-center w-40 text-center justify-center mb-20 px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Kunjungi laman <i class="fa-solid fa-arrow-right ml-2"></i></div>
+          </A>
+          <A href="/" class="text-sm block md:hidden">
+            <div class="flex items-center w-20 text-center justify-center mb-20 px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Lihat <i class="fa-solid fa-arrow-right ml-2"></i></div>
           </A>
         </div>
       </A>
@@ -245,13 +281,20 @@ export default function Home() {
       class="relative w-full h-[60vh] bg-cover bg-center md:bg-top text-center justify-center flex items-center group"
       style="background-image: url('/src/public/images/mockup/11.png'); background-position: center 30%;"
     >
-      <div class="absolute z-0 inset-0 bg-black/15 transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
+      <div class="absolute z-0 inset-0 bg-black/15"></div>
 
-      <div class="w-full z-10 max-w-sm md:max-w-sm lg:max-w-md p-4 rounded text-white font-medium transition-opacity opacity-0 duration-300 group-hover:opacity-100">
+      <div class="w-full z-10 max-w-sm md:max-w-sm lg:max-w-md p-4 rounded text-white font-medium">
         <h2 class="w-full mb-3 text-3xl lg:text-4xl font-medium lg:font-semibold">Kenali gaya yang cocok dengan kamu</h2>
-          <A href="/" class="text-sm justify-center text-center flex">
-            <div class="flex items-center px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Kunjungi laman <i class="fa-solid fa-arrow-right ml-2"></i></div>
-          </A>
+          <div class="hidden md:block">
+            <A href="/" class="text-sm justify-center text-center flex transition-opacity opacity-0 duration-300 group-hover:opacity-100">
+              <div class="flex items-center px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Kunjungi laman <i class="fa-solid fa-arrow-right ml-2"></i></div>
+            </A>
+          </div>
+          <div class="block md:hidden">
+            <A href="/" class="text-sm justify-center text-center flex">
+              <div class="flex items-center px-4 py-2 text-black hover:bg-gray-100 bg-white rounded-full">Kunjungi laman <i class="fa-solid fa-arrow-right ml-2"></i></div>
+            </A>
+          </div>
       </div>
     </A>
     <div
