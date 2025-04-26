@@ -90,6 +90,38 @@ let revealDiv1: HTMLDivElement | undefined;
     img: `/src/public/images/mockup/${(i % 4) + 1}.png`
   }));
 
+  const [sidebarOpen, setSidebarOpen] = createSignal(true);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen());
+  };
+
+  const [isScrollingUp, setIsScrollingUp] = createSignal(false);
+  let lastScrollTop = 0;
+
+  onMount(() => {
+    const handleScroll = () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll < lastScrollTop) {
+        setIsScrollingUp(true); // Scroll ke atas
+      } else {
+        setIsScrollingUp(false); // Scroll ke bawah
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Untuk antisipasi scroll ke atas mentok
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    onCleanup(() => window.removeEventListener('scroll', handleScroll));
+  });
+
+  const [showDD1, setShowDD1] = createSignal(false);
+
+  const [showDD2, setShowDD2] = createSignal(false);
+
+  const [showDD3, setShowDD3] = createSignal(false);
+
+  const [showDD4, setShowDD4] = createSignal(false);
+
   return (
     <section class="mx-8 md:mx-10">
       <div class="pt-20 pb-6 h-[100vh] flex flex-col">
@@ -193,6 +225,287 @@ let revealDiv1: HTMLDivElement | undefined;
               </A>
             </div>
           </A>
+      </div>
+      <div class="w-full flex flex-row border-b border-gray-600 mb-4 py-4 text-sm">
+        <div class="md:w-1/4 flex gap-3 items-center font-medium text-lg rounded-md pl-0 md:pl-4">
+          <button onClick={() => setSidebarOpen(!sidebarOpen())} class="md:block hidden text-left flex items-center font-medium text-lg rounded-md"><i class="fa-solid fa-bars-staggered mr-1"></i> Filter</button>
+          <span class={`hidden ${sidebarOpen() ? 'md:hidden' : 'md:block'}`}>Produk(100)</span>
+        </div>
+        <div class="w-1/2 md:w-2/4 flex gap-3 items-center font-medium text-lg px-2 rounded-md pl-0 md:pl-4">
+          <button class="md:hidden block text-left flex items-center font-medium text-lg px-2 rounded-md"><i class="fa-solid fa-bars-staggered mr-1"></i> Filter</button>
+          <span class={`${sidebarOpen() ? 'md:block' : 'md:hidden'}`}>Produk(100)</span>
+        </div>
+        <button class="w-1/2 md:w-1/4 flex items-center font-medium text-lg px-2 rounded-md justify-end">Urutkan <i class="fa-solid fa-chevron-down ml-1"></i></button>
+      </div>
+      <div class="w-full mb-8 gap-4 flex">
+        {sidebarOpen() && (
+          <div class="w-1/3 lg:w-1/4 hidden md:block bg-gray-100 p-4">
+            <div class={`h-[90vh] sticky ${isScrollingUp() ? 'top-20' : 'top-4'} overflow-y-auto`}>
+              <p class="font-medium text-md border-b border-gray-800 pb-2">Filter</p>
+              <div class="w-full flex flex-wrap text-sm py-4 gap-2 border-gray-800 border-b">
+                <p class="px-3 py-2 bg-gray-600 text-white items-center rounded-full">Sepatu<i class="fa-solid fa-xmark ml-2 cursor-pointer"></i></p>
+                <p class="px-3 py-2 bg-gray-600 text-white items-center rounded-full">Hoodie<i class="fa-solid fa-xmark ml-2 cursor-pointer"></i></p>
+                <p class="px-3 py-2 bg-gray-600 text-white items-center rounded-full">Kaos<i class="fa-solid fa-xmark ml-2 cursor-pointer"></i></p>
+                <p class="px-3 py-2 bg-gray-600 text-white items-center rounded-full">Pria<i class="fa-solid fa-xmark ml-2 cursor-pointer"></i></p>
+              </div>
+              <div class="w-full flex-col border-gray-800 border-b pr-2">
+                <div class="flex items-center justify-between cursor-pointer" onClick={() => setShowDD1(!showDD1())}>
+                  <p class="flex items-center text-md font-medium py-4">
+                    Gender
+                  </p>
+                  <i
+                    class={`fa-solid fa-chevron-down ml-2 transition-transform duration-300 md:block ${
+                      showDD1() ? "rotate-180" : ""
+                    }`}
+                  ></i>
+                </div>
+                <ul class={`${showDD1() ? "block" : "hidden"} space-y-3 pl-1 pb-4 transition-opacity duration-300`}>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                        Pria
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                        Wanita
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                        Unisex
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="w-full flex-col border-gray-800 border-b pr-2">
+                <div class="flex items-center justify-between cursor-pointer" onClick={() => setShowDD2(!showDD2())}>
+                  <p class="flex items-center text-md font-medium py-4">
+                    Kategori
+                  </p>
+                  <i
+                    class={`fa-solid fa-chevron-down ml-2 transition-transform duration-300 md:block ${
+                      showDD2() ? "rotate-180" : ""
+                    }`}
+                  ></i>
+                </div>
+                <ul class={`${showDD2() ? "block" : "hidden"} space-y-3 pl-1 pb-4 transition-opacity duration-300`}>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                        Hoodie
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                        Kaos
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                        Celana
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="w-full flex-col border-gray-800 border-b pr-2">
+                <div class="flex items-center justify-between cursor-pointer" onClick={() => setShowDD3(!showDD3())}>
+                  <p class="flex items-center text-md font-medium py-4">
+                  Kisaran harga
+                  </p>
+                  <i
+                    class={`fa-solid fa-chevron-down ml-2 transition-transform duration-300 md:block ${
+                      showDD3() ? "rotate-180" : ""
+                    }`}
+                  ></i>
+                </div>
+                <ul class={`${showDD3() ? "block" : "hidden"} space-y-3 pl-1 pb-4 transition-opacity duration-300`}>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                      Rp 0 - Rp 250.000
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                      Rp 250.000 - Rp 500.000
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                      Rp 500.000 ++
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="w-full flex-col border-gray-800 border-b pr-2">
+                <div class="flex items-center justify-between cursor-pointer" onClick={() => setShowDD4(!showDD4())}>
+                  <p class="flex items-center text-md font-medium py-4">
+                    Warna
+                  </p>
+                  <i
+                    class={`fa-solid fa-chevron-down ml-2 transition-transform duration-300 md:block ${
+                      showDD4() ? "rotate-180" : ""
+                    }`}
+                  ></i>
+                </div>
+                <ul class={`${showDD4() ? "block" : "hidden"} space-y-3 pl-1 pb-4 transition-opacity duration-300`}>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                        Hitam
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                      Putih
+                      </label>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-center gap-2">
+                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
+                      <label for="pria" class="hover:text-gray-500 text-gray-700">
+                      Krem
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
+        <div class={`grid gap-4 grid-cols-2
+          ${sidebarOpen() ? 'w-full md:w-2/3 lg:w-3/4 md:grid-cols-2 lg:grid-cols-3' : 'w-full md:grid-cols-3 lg:grid-cols-4'}`}>
+            <A
+              href="/"
+                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                >
+                <img
+                src="/src/public/images/mockup/9.png"
+                alt=""
+                class="h-[50vh] object-cover w-full"
+              />
+              <div class="p-2 text-left text-black">
+                <p class="text-md font-semibold truncate">Kaos</p>
+                <p class="text-sm">Rp 100000</p>
+              </div>
+            </A>
+        <A
+              href="/"
+                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                >
+                <img
+                src="/src/public/images/mockup/7.png"
+                alt=""
+                class="h-[50vh] object-cover w-full"
+              />
+              <div class="p-2 text-left text-black">
+                <p class="text-md font-semibold truncate">Kaos</p>
+                <p class="text-sm">Rp 100000</p>
+              </div>
+            </A>
+        <A
+              href="/"
+                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                >
+                <img
+                src="/src/public/images/mockup/11.png"
+                alt=""
+                class="h-[50vh] object-cover w-full"
+              />
+              <div class="p-2 text-left text-black">
+                <p class="text-md font-semibold truncate">Kaos</p>
+                <p class="text-sm">Rp 100000</p>
+              </div>
+            </A>
+        <A
+              href="/"
+                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                >
+                <img
+                src="/src/public/images/mockup/7.png"
+                alt=""
+                class="h-[50vh] object-cover w-full"
+              />
+              <div class="p-2 text-left text-black">
+                <p class="text-md font-semibold truncate">Kaos</p>
+                <p class="text-sm">Rp 100000</p>
+              </div>
+            </A>
+        <A
+              href="/"
+                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                >
+                <img
+                src="/src/public/images/mockup/11.png"
+                alt=""
+                class="h-[50vh] object-cover w-full"
+              />
+              <div class="p-2 text-left text-black">
+                <p class="text-md font-semibold truncate">Kaos</p>
+                <p class="text-sm">Rp 100000</p>
+              </div>
+            </A>
+        <A
+              href="/"
+                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                >
+                <img
+                src="/src/public/images/mockup/9.png"
+                alt=""
+                class="h-[50vh] object-cover w-full"
+              />
+              <div class="p-2 text-left text-black">
+                <p class="text-md font-semibold truncate">Kaos</p>
+                <p class="text-sm">Rp 100000</p>
+              </div>
+            </A>
+        <A
+              href="/"
+                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                >
+                <img
+                src="/src/public/images/mockup/9.png"
+                alt=""
+                class="h-[50vh] object-cover w-full"
+              />
+              <div class="p-2 text-left text-black">
+                <p class="text-md font-semibold truncate">Kaos</p>
+                <p class="text-sm">Rp 100000</p>
+              </div>
+            </A>
+        <div>
+        </div>
+      </div>
       </div>
     </section>
   );
