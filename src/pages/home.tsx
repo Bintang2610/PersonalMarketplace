@@ -145,7 +145,7 @@ export default function Home() {
   return (
     <section class="mx-8 md:mx-10">
     <div class="pt-20 pb-6 h-[100vh] flex flex-col">
-      <A href=""
+      <A href="/produk"
         class="relative w-full flex-1 bg-cover bg-center md:bg-top flex items-center group"
         style="background-image: url('/src/public/images/mockup/13.png');"
       >

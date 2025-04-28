@@ -403,109 +403,115 @@ let revealDiv1: HTMLDivElement | undefined;
             </div>
           </div>
         )}
-        <div class={`grid gap-4 grid-cols-2
-          ${sidebarOpen() ? 'w-full md:w-2/3 lg:w-3/4 md:grid-cols-2 lg:grid-cols-3' : 'w-full md:grid-cols-3 lg:grid-cols-4'}`}>
-            <A
-              href="/"
-                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
-                >
-                <img
-                src="/src/public/images/mockup/9.png"
-                alt=""
-                class="h-[50vh] object-cover w-full"
-              />
-              <div class="p-2 text-left text-black">
-                <p class="text-md font-semibold truncate">Kaos</p>
-                <p class="text-sm">Rp 100000</p>
+        <div class={`${sidebarOpen() ? 'w-full md:w-2/3 lg:w-3/4' : 'w-full'}`}>
+            <div class={`grid gap-4 grid-cols-2
+            ${sidebarOpen() ? 'w-full md:grid-cols-2 lg:grid-cols-3' : 'w-full md:grid-cols-3 lg:grid-cols-4'}`}>
+              <A
+                href="/produk"
+                  class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                  >
+                  <img
+                  src="/src/public/images/mockup/9.png"
+                  alt=""
+                  class="h-[50vh] object-cover w-full"
+                />
+                <div class="p-2 text-left text-black">
+                  <p class="text-md font-semibold truncate">Kaos</p>
+                  <p class="text-sm">Rp 100000</p>
+                </div>
+              </A>
+              <A
+                href="/produk"
+                  class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                  >
+                  <img
+                  src="/src/public/images/mockup/7.png"
+                  alt=""
+                  class="h-[50vh] object-cover w-full"
+                />
+                <div class="p-2 text-left text-black">
+                  <p class="text-md font-semibold truncate">Kaos</p>
+                  <p class="text-sm">Rp 100000</p>
+                </div>
+              </A>
+              <A
+                href="/produk"
+                  class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                  >
+                  <img
+                  src="/src/public/images/mockup/11.png"
+                  alt=""
+                  class="h-[50vh] object-cover w-full"
+                />
+                <div class="p-2 text-left text-black">
+                  <p class="text-md font-semibold truncate">Kaos</p>
+                  <p class="text-sm">Rp 100000</p>
+                </div>
+              </A>
+              <A
+                href="/produk"
+                  class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                  >
+                  <img
+                  src="/src/public/images/mockup/7.png"
+                  alt=""
+                  class="h-[50vh] object-cover w-full"
+                />
+                <div class="p-2 text-left text-black">
+                  <p class="text-md font-semibold truncate">Kaos</p>
+                  <p class="text-sm">Rp 100000</p>
+                </div>
+              </A>
+              <A
+                href="/produk"
+                  class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                  >
+                  <img
+                  src="/src/public/images/mockup/11.png"
+                  alt=""
+                  class="h-[50vh] object-cover w-full"
+                />
+                <div class="p-2 text-left text-black">
+                  <p class="text-md font-semibold truncate">Kaos</p>
+                  <p class="text-sm">Rp 100000</p>
+                </div>
+              </A>
+              <A
+                href="/produk"
+                  class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                  >
+                  <img
+                  src="/src/public/images/mockup/9.png"
+                  alt=""
+                  class="h-[50vh] object-cover w-full"
+                />
+                <div class="p-2 text-left text-black">
+                  <p class="text-md font-semibold truncate">Kaos</p>
+                  <p class="text-sm">Rp 100000</p>
+                </div>
+              </A>
+              <A
+                href="/produk"
+                  class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
+                  >
+                  <img
+                  src="/src/public/images/mockup/11.png"
+                  alt=""
+                  class="h-[50vh] object-cover w-full"
+                />
+                <div class="p-2 text-left text-black">
+                  <p class="text-md font-semibold truncate">Kaos</p>
+                  <p class="text-sm">Rp 100000</p>
+                </div>
+              </A>
+            </div>
+            <div class="w-full flex mt-6 justify-center text-sm">
+              <div class="block justify-center text-center">
+                <p class="text-gray-400 py-2">7/100</p>
+                <button class="hover:bg-gray-50 px-4 md:px-6 py-2 md:py-3 border border-gray-400 rounded">Lihat lebih banyak</button>
               </div>
-            </A>
-        <A
-              href="/"
-                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
-                >
-                <img
-                src="/src/public/images/mockup/7.png"
-                alt=""
-                class="h-[50vh] object-cover w-full"
-              />
-              <div class="p-2 text-left text-black">
-                <p class="text-md font-semibold truncate">Kaos</p>
-                <p class="text-sm">Rp 100000</p>
-              </div>
-            </A>
-        <A
-              href="/"
-                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
-                >
-                <img
-                src="/src/public/images/mockup/11.png"
-                alt=""
-                class="h-[50vh] object-cover w-full"
-              />
-              <div class="p-2 text-left text-black">
-                <p class="text-md font-semibold truncate">Kaos</p>
-                <p class="text-sm">Rp 100000</p>
-              </div>
-            </A>
-        <A
-              href="/"
-                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
-                >
-                <img
-                src="/src/public/images/mockup/7.png"
-                alt=""
-                class="h-[50vh] object-cover w-full"
-              />
-              <div class="p-2 text-left text-black">
-                <p class="text-md font-semibold truncate">Kaos</p>
-                <p class="text-sm">Rp 100000</p>
-              </div>
-            </A>
-        <A
-              href="/"
-                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
-                >
-                <img
-                src="/src/public/images/mockup/11.png"
-                alt=""
-                class="h-[50vh] object-cover w-full"
-              />
-              <div class="p-2 text-left text-black">
-                <p class="text-md font-semibold truncate">Kaos</p>
-                <p class="text-sm">Rp 100000</p>
-              </div>
-            </A>
-        <A
-              href="/"
-                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
-                >
-                <img
-                src="/src/public/images/mockup/9.png"
-                alt=""
-                class="h-[50vh] object-cover w-full"
-              />
-              <div class="p-2 text-left text-black">
-                <p class="text-md font-semibold truncate">Kaos</p>
-                <p class="text-sm">Rp 100000</p>
-              </div>
-            </A>
-        <A
-              href="/"
-                class="w-full flex-shrink-0 flex flex-col bg-white rounded border"
-                >
-                <img
-                src="/src/public/images/mockup/9.png"
-                alt=""
-                class="h-[50vh] object-cover w-full"
-              />
-              <div class="p-2 text-left text-black">
-                <p class="text-md font-semibold truncate">Kaos</p>
-                <p class="text-sm">Rp 100000</p>
-              </div>
-            </A>
-        <div>
+            </div>
         </div>
-      </div>
       </div>
     </section>
   );
