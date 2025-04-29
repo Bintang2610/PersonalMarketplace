@@ -62,10 +62,10 @@ const App: Component = (props: { children: Element }) => {
                 <A href="/katalog" class="hover:text-gray-600 hover:underline text-black text-sm">Katalog</A>
               </li>
               <li>
-                <A href="/" class="hover:text-gray-600 hover:underline text-black text-sm">Pria</A>
+                <A href="/katalogpria" class="hover:text-gray-600 hover:underline text-black text-sm">Pria</A>
               </li>
               <li>
-                <A href="/" class="hover:text-gray-600 hover:underline text-black text-sm">Wanita</A>
+                <A href="/katalogwanita" class="hover:text-gray-600 hover:underline text-black text-sm">Wanita</A>
               </li>
             </ul>
           </div>
@@ -86,10 +86,10 @@ const App: Component = (props: { children: Element }) => {
         </div>
         <div class={`md:hidden ${isOpen() ? '' : 'hidden'} w-full bg-white border-t border-gray-200 px-4 py-2`}>
             <div class="w-full flex flex-col text-sm font-medium text-gray-700">
-            <A href="" onClick={toggleMobileMenu} class="w-full py-4 px-4">Terbaru</A>
+            <A href="/terbaru" onClick={toggleMobileMenu} class="w-full py-4 px-4">Terbaru</A>
             <A href="/katalog" onClick={toggleMobileMenu} class="w-full py-4 px-4 border-t border-gray-200">Katalog</A>
-            <A href="" onClick={toggleMobileMenu} class="w-full py-4 px-4 border-t border-gray-200">Pria</A>
-            <A href="" onClick={toggleMobileMenu} class="w-full py-4 px-4 border-t border-gray-200">Wanita</A>
+            <A href="/katalogpria" onClick={toggleMobileMenu} class="w-full py-4 px-4 border-t border-gray-200">Pria</A>
+            <A href="/katalogwanita" onClick={toggleMobileMenu} class="w-full py-4 px-4 border-t border-gray-200">Wanita</A>
             </div>
         </div>
       </nav>

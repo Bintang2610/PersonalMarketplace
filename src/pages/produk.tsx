@@ -332,7 +332,7 @@ let revealDiv1: HTMLDivElement | undefined;
     >
       <div class="w-full flex flex-col justify-center p-4 text-black">
         <h2 class="mb-6 text-xl font-medium lg:font-semibold">
-          Terbaru di Personal Store
+          Produk serupa
         </h2>
 
         <div ref={revealDiv} class="opacity-0 translate-y-10 transition-all duration-700 overflow-x-auto w-full flex-1">

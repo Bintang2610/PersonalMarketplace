@@ -114,8 +114,6 @@ let revealDiv1: HTMLDivElement | undefined;
     onCleanup(() => window.removeEventListener('scroll', handleScroll));
   });
 
-  const [showDD1, setShowDD1] = createSignal(false);
-
   const [showDD2, setShowDD2] = createSignal(false);
 
   const [showDD3, setShowDD3] = createSignal(false);
@@ -217,7 +215,7 @@ let revealDiv1: HTMLDivElement | undefined;
     </div>
       <A href="/produk"
             class="relative w-full flex-1 bg-cover bg-center md:bg-top flex items-center group"
-            style="background-image: url('/src/public/images/mockup/13.png');"
+            style="background-image: url('/src/public/images/mockup/11.png'); background-position: center 30%;"
           >
             <div class="absolute inset-0 bg-black/5 transition-opacity duration-300 group-hover:opacity-0"></div>
       
@@ -283,44 +281,6 @@ let revealDiv1: HTMLDivElement | undefined;
                 <p class="px-3 py-2 bg-gray-600 text-white items-center rounded-full">Hoodie<i class="fa-solid fa-xmark ml-2 cursor-pointer"></i></p>
                 <p class="px-3 py-2 bg-gray-600 text-white items-center rounded-full">Kaos<i class="fa-solid fa-xmark ml-2 cursor-pointer"></i></p>
                 <p class="px-3 py-2 bg-gray-600 text-white items-center rounded-full">Pria<i class="fa-solid fa-xmark ml-2 cursor-pointer"></i></p>
-              </div>
-              <div class="w-full flex-col border-gray-800 border-b pr-2">
-                <div class="flex items-center justify-between cursor-pointer" onClick={() => setShowDD1(!showDD1())}>
-                  <p class="flex items-center text-md font-medium py-4">
-                    Gender
-                  </p>
-                  <i
-                    class={`fa-solid fa-chevron-down ml-2 transition-transform duration-300 md:block ${
-                      showDD1() ? "rotate-180" : ""
-                    }`}
-                  ></i>
-                </div>
-                <ul class={`${showDD1() ? "block" : "hidden"} space-y-3 pl-1 pb-4 transition-opacity duration-300`}>
-                  <li>
-                    <div class="flex items-center gap-2">
-                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
-                      <label for="pria" class="hover:text-gray-500 text-gray-700">
-                        Pria
-                      </label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="flex items-center gap-2">
-                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
-                      <label for="pria" class="hover:text-gray-500 text-gray-700">
-                        Wanita
-                      </label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="flex items-center gap-2">
-                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
-                      <label for="pria" class="hover:text-gray-500 text-gray-700">
-                        Unisex
-                      </label>
-                    </div>
-                  </li>
-                </ul>
               </div>
               <div class="w-full flex-col border-gray-800 border-b pr-2">
                 <div class="flex items-center justify-between cursor-pointer" onClick={() => setShowDD2(!showDD2())}>
@@ -448,44 +408,6 @@ let revealDiv1: HTMLDivElement | undefined;
                 <p class="px-3 py-2 bg-gray-600 text-white items-center rounded-full">Hoodie<i class="fa-solid fa-xmark ml-2 cursor-pointer"></i></p>
                 <p class="px-3 py-2 bg-gray-600 text-white items-center rounded-full">Kaos<i class="fa-solid fa-xmark ml-2 cursor-pointer"></i></p>
                 <p class="px-3 py-2 bg-gray-600 text-white items-center rounded-full">Pria<i class="fa-solid fa-xmark ml-2 cursor-pointer"></i></p>
-              </div>
-              <div class="w-full flex-col border-gray-800 border-b pr-2">
-                <div class="flex items-center justify-between cursor-pointer" onClick={() => setShowDD1(!showDD1())}>
-                  <p class="flex items-center text-md font-medium py-4">
-                    Gender
-                  </p>
-                  <i
-                    class={`fa-solid fa-chevron-down ml-2 transition-transform duration-300 md:block ${
-                      showDD1() ? "rotate-180" : ""
-                    }`}
-                  ></i>
-                </div>
-                <ul class={`${showDD1() ? "block" : "hidden"} space-y-3 pl-1 pb-4 transition-opacity duration-300`}>
-                  <li>
-                    <div class="flex items-center gap-2">
-                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
-                      <label for="pria" class="hover:text-gray-500 text-gray-700">
-                        Pria
-                      </label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="flex items-center gap-2">
-                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
-                      <label for="pria" class="hover:text-gray-500 text-gray-700">
-                        Wanita
-                      </label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="flex items-center gap-2">
-                      <input type="checkbox" class="w-4 h-4 cursor-pointer" />
-                      <label for="pria" class="hover:text-gray-500 text-gray-700">
-                        Unisex
-                      </label>
-                    </div>
-                  </li>
-                </ul>
               </div>
               <div class="w-full flex-col border-gray-800 border-b pr-2">
                 <div class="flex items-center justify-between cursor-pointer" onClick={() => setShowDD2(!showDD2())}>
