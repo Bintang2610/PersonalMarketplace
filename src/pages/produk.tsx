@@ -72,6 +72,47 @@ let revealDiv1: HTMLDivElement | undefined;
     
   const [activeImage, setActiveImage] = createSignal("/src/public/images/mockup/1.png");
 
+  const [scrollX, setScrollX] = createSignal(0);
+  let containerRef;
+
+  const scrollNext = () => {
+    if (containerRef) {
+      containerRef.scrollBy({ left: 215, behavior: 'smooth' });
+    }
+  };
+
+  const scrollPrev = () => {
+    if (containerRef) {
+      containerRef.scrollBy({ left: -215, behavior: 'smooth' });
+    }
+  };
+
+  const products = Array.from({ length: 10 }).map((_, i) => ({
+    id: i + 1,
+    title: `Hoodie ${i + 1}`,
+    price: `Rp ${200000 + i * 10000}`,
+    img: `/src/public/images/mockup/${(i % 4) + 1}.png`
+  }));
+
+  let revealDiv: HTMLDivElement | undefined;
+
+  onMount(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && revealDiv) {
+            revealDiv.classList.remove('opacity-0', 'translate-y-10');
+            revealDiv.classList.add('opacity-100', 'translate-y-0');
+            observer.unobserve(entry.target); // Berhenti observe setelah muncul
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    if (revealDiv) observer.observe(revealDiv);
+  });
+
   return (
     <section class="">
       <div class="flex h-full grid grid-cols-1 md:grid-cols-2">
@@ -85,8 +126,7 @@ let revealDiv1: HTMLDivElement | undefined;
 
                 <div class="absolute z-10 inset-0 bg-black/15 transition-opacity duration-300 opacity-0 md:group-hover:opacity-100"></div>
                 
-                {/* Konten yang muncul ketika hover */}
-                <div class="absolute z-20 bottom-0 w-full bg-black bg-opacity-50 text-black p-4 transition-all duration-300 md:opacity-0 md:group-hover:opacity-100">
+                <div class="absolute z-20 bottom-0 w-full bg-black bg-opacity-50 text-black p-4 transition-all duration-300 opacity-0 md:group-hover:opacity-100">
                     <div class="flex flex-wrap justify-center gap-4">
                         <img 
                             src="/src/public/images/mockup/1.png" 
@@ -109,6 +149,28 @@ let revealDiv1: HTMLDivElement | undefined;
                     </div>
                 </div>
             </div>
+            <div class="w-full block md:hidden relative bg-gray-100 text-black p-4">
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <img 
+                            src="/src/public/images/mockup/1.png" 
+                            alt="" 
+                            onClick={() => setActiveImage("/src/public/images/mockup/1.png")}
+                            class="w-[10vh] h-[10vh] object-cover cursor-pointer" 
+                        />
+                        <img 
+                            src="/src/public/images/mockup/9.png" 
+                            alt=""
+                            onClick={() => setActiveImage("/src/public/images/mockup/9.png")} 
+                            class="w-[10vh] h-[10vh] object-cover cursor-pointer"
+                        />
+                        <img 
+                            src="/src/public/images/mockup/11.png" 
+                            alt=""
+                            onClick={() => setActiveImage("/src/public/images/mockup/11.png")} 
+                            class="w-[10vh] h-[10vh] object-cover cursor-pointer"
+                        />
+                    </div>
+                </div>
         </div>
         <div class="w-full flex justify-center text-center text-sm md:mt-12 py-12 md:py-16 lg:py-28 px-8 md:px-16 lg:px-28 text-black">
             <div class="w-full space-y-3 text-left">
@@ -228,6 +290,57 @@ let revealDiv1: HTMLDivElement | undefined;
             </div> 
         </div>
       </div>
+      <div
+      class="relative w-full h-[80vh] px-6 md:px-8 flex justify-center items-center"
+    >
+      <div class="w-full flex flex-col justify-center p-4 text-black">
+        <h2 class="mb-6 text-xl font-medium lg:font-semibold">
+          Terbaru di Personal Store
+        </h2>
+
+        <div ref={revealDiv} class="opacity-0 translate-y-10 transition-all duration-700 overflow-x-auto w-full flex-1">
+          <div class="relative w-full">
+            <button
+              onClick={scrollPrev}
+              class="absolute z-10 left-0 top-1/2 -translate-y-1/2 bg-white p-2"
+            >
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div
+              ref={el => (containerRef = el)}
+              class="overflow-x-hidden"
+            >
+              <div class="flex space-x-5 w-fit">
+                {products.map(product => (
+                  <a
+                    href="/"
+                    class="w-[195px] flex-shrink-0 flex flex-col overflow-hidden bg-white"
+                  >
+                    <img
+                      src={product.img}
+                      alt={product.title}
+                      class="w-full h-[240px] object-cover border"
+                    />
+                    <div class="p-2 text-left text-black">
+                      <p class="text-md font-semibold">{product.title}</p>
+                      <p class="text-sm">{product.price}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <button
+              onClick={scrollNext}
+              class="absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-white p-2"
+            >
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        </div>
+        </div>
     </section>
   );
 }

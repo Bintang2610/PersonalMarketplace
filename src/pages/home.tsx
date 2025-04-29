@@ -164,10 +164,10 @@ export default function Home() {
       </A>
     </div>
     <div
-      class="relative w-full h-[655px] flex justify-center items-center"
+      class="relative w-full h-[90vh] flex justify-center items-center"
     >
       <div class="w-full flex flex-col justify-center p-4 text-black">
-        <h2 class="mb-6 text-3xl lg:text-4xl font-medium lg:font-semibold">
+        <h2 class="mb-6 text-xl lg:text-2xl font-medium lg:font-semibold">
           Terbaru di Personal Store
         </h2>
 
@@ -298,10 +298,10 @@ export default function Home() {
       </div>
     </A>
     <div
-      class="relative w-full h-[655px] flex justify-center items-center"
+      class="relative w-full h-[90vh] flex justify-center items-center"
     >
       <div class="w-full flex flex-col justify-center p-4 text-black">
-        <h2 class="mb-6 text-3xl lg:text-4xl font-medium lg:font-semibold">
+        <h2 class="mb-6 text-xl lg:text-2xl font-medium lg:font-semibold">
           Populer di Personal Store
         </h2>
 
