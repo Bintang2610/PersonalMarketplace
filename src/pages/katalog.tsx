@@ -208,7 +208,7 @@ let revealDiv1: HTMLDivElement | undefined;
         </div>
       )}
     </div>
-      <A href=""
+      <A href="/produk"
             class="relative w-full flex-1 bg-cover bg-center md:bg-top flex items-center group"
             style="background-image: url('/src/public/images/mockup/13.png');"
           >

@@ -56,7 +56,7 @@ const App: Component = (props: { children: Element }) => {
           <div class="hidden md:block absolute left-1/2 top-3 transform -translate-x-1/2">
             <ul class="flex items-center space-x-6 font-medium bg-white px-4 py-2 rounded-lg">
               <li>
-                <A href="/" class="hover:text-gray-600 hover:underline text-black text-sm">Terbaru</A>
+                <A href="/terbaru" class="hover:text-gray-600 hover:underline text-black text-sm">Terbaru</A>
               </li>
               <li>
                 <A href="/katalog" class="hover:text-gray-600 hover:underline text-black text-sm">Katalog</A>

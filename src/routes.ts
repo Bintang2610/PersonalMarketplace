@@ -17,6 +17,10 @@ export const routes: RouteDefinition[] = [
     component: lazy(() => import('./pages/produk')),
   },
   {
+    path: '/terbaru',
+    component: lazy(() => import('./pages/terbaru')),
+  },
+  {
     path: '**',
     component: lazy(() => import('./errors/404')),
   },

@@ -1,5 +1,5 @@
 import { createSignal, onMount, onCleanup } from 'solid-js';
-import { A, useLocation } from '@solidjs/router';
+import { A, useLocation, useNavigate  } from '@solidjs/router';
 
 export default function About() {
 
@@ -30,6 +30,27 @@ let revealDiv1: HTMLDivElement | undefined;
 
         window.addEventListener('scroll', handleScroll);
         onCleanup(() => window.removeEventListener('scroll', handleScroll));
+    });
+
+    const [isScrollingUp2, setIsScrollingUp2] = createSignal(true);
+    let lastScrollTop4 = 0;
+
+    onMount(() => {
+    const handleScroll = () => {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Deteksi arah scroll
+        if (currentScroll < lastScrollTop4) {
+        setIsScrollingUp2(true); // Scroll ke atas
+        } else {
+        setIsScrollingUp2(false); // Scroll ke bawah
+        }
+
+        lastScrollTop4 = currentScroll <= 0 ? 0 : currentScroll;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    onCleanup(() => window.removeEventListener('scroll', handleScroll));
     });
 
     const [isScrollingDown, setIsScrollingDown] = createSignal(false);
@@ -113,10 +134,26 @@ let revealDiv1: HTMLDivElement | undefined;
     if (revealDiv) observer.observe(revealDiv);
   });
 
+  const navigate = useNavigate();
+
+  function handleBack() {
+    if (window.history.length > 1) {
+      navigate(-1); // Kembali ke halaman sebelumnya
+    } else {
+      navigate('/'); // Kalau tidak ada history, ke homepage
+    }
+  }
+
   return (
     <section class="">
       <div class="flex h-full grid grid-cols-1 md:grid-cols-2">
         <div class="w-full h-full">
+            <div class={`fixed left-10 ${isScrollingUp2() ? 'top-24' : 'top-10'} text-xs z-10 px-2 py-1 bg-white transition-all duration-300`}>
+                <button onClick={handleBack} class="flex items-center space-x-1">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    <span class="text-sm">Kembali</span>
+                </button>
+            </div>
             <div class={`${isScrollingDown() ? 'pt-0' : 'pt-16'} group w-full h-[100vh] top-0 sticky flex items-center justify-center overflow-hidden relative`}>
                 <img 
                     src={activeImage()} 
