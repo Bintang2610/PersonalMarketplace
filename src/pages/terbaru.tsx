@@ -1,7 +1,7 @@
 import { createSignal, onMount } from 'solid-js';
 import { A, useLocation } from '@solidjs/router';
 
-export default function Home() {
+export default function Terbaru() {
 
   let revealDiv: HTMLDivElement | undefined;
 

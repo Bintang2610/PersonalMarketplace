@@ -1,7 +1,7 @@
 import { createSignal, onMount, onCleanup } from 'solid-js';
 import { A, useLocation } from '@solidjs/router';
 
-export default function About() {
+export default function Katalog() {
 
 let revealDiv1: HTMLDivElement | undefined;
 

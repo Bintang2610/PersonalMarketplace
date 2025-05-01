@@ -1,7 +1,7 @@
 import { createSignal, onMount, onCleanup } from 'solid-js';
 import { A, useLocation, useNavigate  } from '@solidjs/router';
 
-export default function About() {
+export default function Produk() {
 
 let revealDiv1: HTMLDivElement | undefined;
 
@@ -148,7 +148,7 @@ let revealDiv1: HTMLDivElement | undefined;
     <section class="">
       <div class="flex h-full grid grid-cols-1 md:grid-cols-2">
         <div class="w-full h-full">
-            <div class={`fixed left-10 ${isScrollingUp2() ? 'top-24' : 'top-10'} text-xs z-10 px-2 py-1 bg-white transition-all duration-300`}>
+            <div class={`fixed left-10 ${isScrollingUp2() ? 'top-24' : 'top-10'} rounded text-xs z-10 px-2 py-1 bg-white transition-all duration-300`}>
                 <button onClick={handleBack} class="flex items-center space-x-1">
                     <i class="fa-solid fa-chevron-left"></i>
                     <span class="text-sm">Kembali</span>

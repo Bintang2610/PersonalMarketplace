@@ -4,6 +4,20 @@ import { createSignal, onCleanup, onMount } from "solid-js";
 
 const App: Component = (props: { children: Element }) => {
   const [isOpen, setIsOpen] = createSignal(false);
+  let menuRef;
+
+  onMount(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef && !menuRef.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    onCleanup(() => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    });
+  });
 
   const toggleMobileMenu = () => {
     setIsOpen(!isOpen());
@@ -44,6 +58,26 @@ const App: Component = (props: { children: Element }) => {
     }, 100); // kasih jeda sedikit biar halaman sempat load
   };
 
+  const [isOpen2, setIsOpen2] = createSignal(false);
+  let dropdownRef;
+  let buttonRef;
+
+  const handleClickOutside = (event) => {
+    if (
+      dropdownRef && !dropdownRef.contains(event.target) &&
+      buttonRef && !buttonRef.contains(event.target)
+    ) {
+      setIsOpen2(false);
+    }
+  };
+
+  onMount(() => {
+    document.addEventListener("click", handleClickOutside);
+    onCleanup(() => {
+      document.removeEventListener("click", handleClickOutside);
+    });
+  });
+
   return (
     <>
       <nav class={`bg-white fixed w-full z-30 top-0 start-0 border-b border-gray-200 transition-transform duration-300 ${
@@ -70,21 +104,43 @@ const App: Component = (props: { children: Element }) => {
             </ul>
           </div>
           <div class="flex items-center space-x-3 z-10">
-            <button onClick={goToKatalogAndFocus} class="flex items-center rounded-full px-2 py-2 hover:bg-gray-100 bg-white justify-center text-black text-md">
+            <button onClick={goToKatalogAndFocus} class="flex text-gray-600 items-center rounded-full px-2 py-2 hover:bg-gray-100 bg-white justify-center text-black text-md">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-            <A href="/profil" class="flex items-center rounded-full px-2 py-2 hover:bg-gray-100 bg-white justify-center text-black text-md">
+            <A href="/favorit" class="flex items-center rounded-full px-2 py-2 hover:bg-gray-100 bg-white justify-center text-black text-md">
               <i class="fa-regular fa-heart"></i>
             </A>
-            <A href="/profil" class="flex items-center rounded-full px-2 py-2 hover:bg-gray-100 bg-white justify-center text-black text-md">
+            <button ref={buttonRef} onClick={() => setIsOpen2(!isOpen2())} class="flex items-center rounded-full px-2 py-2 hover:bg-gray-100 bg-white justify-center text-black text-md">
               <i class="fa-regular fa-user"></i>
-            </A>
+            </button>
+
+            <div ref={dropdownRef}
+              class={`absolute right-2 top-20 w-60 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 transition-opacity duration-200 ${
+                isOpen2() ? "opacity-100 visible" : "opacity-0 invisible"
+              }`}
+            >
+              <div class="w-full h-full text-sm font-default py-1">
+                <A href="/" class="w-full flex flex-row border-b border-gray-200 items-center px-6 py-4">
+                  <img src="/src/public/images/mockup/11.png" alt="" class="w-8 h-8 rounded-full object-cover" />
+                  <div class="flex flex-col ml-4">
+                    <h2 class="text-md font-medium truncate w-[130px]">Rian Diana</h2>
+                    <p class="text-sm">Lihat profil</p>
+                  </div>
+                </A>
+                <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-bell mr-4"></i>Notifikasi</A>
+                <A href="/keranjang" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-basket-shopping mr-4"></i>Keranjang</A>
+                <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-cart-shopping mr-4"></i>Pembelian</A>
+                <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-user-tie mr-4"></i>Layanan</A>
+                <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center border-t border-gray-200 hover:bg-gray-100"><i class="fa-solid fa-right-from-bracket mr-4"></i>Keluar akun</A>
+              </div>
+            </div>
+
             <button onClick={toggleMobileMenu} type="button" class="md:hidden px-2 py-1 h-auto justify-center text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
               <i class="fa-solid fa-bars"></i>
             </button>
           </div>
         </div>
-        <div class={`md:hidden ${isOpen() ? '' : 'hidden'} w-full bg-white border-t border-gray-200 px-4 py-2`}>
+        <div ref={el => menuRef = el} class={`md:hidden ${isOpen() ? '' : 'hidden'} w-full bg-white border-t border-gray-200 px-4 py-2`}>
             <div class="w-full flex flex-col text-sm font-medium text-gray-700">
             <A href="/terbaru" onClick={toggleMobileMenu} class="w-full py-4 px-4">Terbaru</A>
             <A href="/katalog" onClick={toggleMobileMenu} class="w-full py-4 px-4 border-t border-gray-200">Katalog</A>
