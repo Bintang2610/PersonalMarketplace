@@ -130,7 +130,7 @@ const App: Component = (props: { children: Element }) => {
                 <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-bell mr-4"></i>Notifikasi</A>
                 <A href="/keranjang" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-basket-shopping mr-4"></i>Keranjang</A>
                 <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-cart-shopping mr-4"></i>Pembelian</A>
-                <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-user-tie mr-4"></i>Layanan</A>
+                <A href="/layanan" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-user-tie mr-4"></i>Layanan</A>
                 <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center border-t border-gray-200 hover:bg-gray-100"><i class="fa-solid fa-right-from-bracket mr-4"></i>Keluar akun</A>
               </div>
             </div>
