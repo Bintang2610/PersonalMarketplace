@@ -41,6 +41,14 @@ export const routes: RouteDefinition[] = [
     component: lazy(() => import('./pages/layanan')),
   },
   {
+    path: '/profil',
+    component: lazy(() => import('./pages/profil')),
+  },
+  {
+    path: '/notifikasi',
+    component: lazy(() => import('./pages/notifikasi')),
+  },
+  {
     path: '**',
     component: lazy(() => import('./errors/404')),
   },

@@ -120,16 +120,16 @@ const App: Component = (props: { children: Element }) => {
               }`}
             >
               <div class="w-full h-full text-sm font-default py-1">
-                <A href="/" class="w-full flex flex-row border-b border-gray-200 items-center px-6 py-4">
+                <A href="/profil" class="w-full flex flex-row border-b border-gray-200 items-center px-6 py-4">
                   <img src="/src/public/images/mockup/11.png" alt="" class="w-8 h-8 rounded-full object-cover" />
                   <div class="flex flex-col ml-4">
                     <h2 class="text-md font-medium truncate w-[130px]">Rian Diana</h2>
                     <p class="text-sm">Lihat profil</p>
                   </div>
                 </A>
-                <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-bell mr-4"></i>Notifikasi</A>
+                <A href="/notifikasi" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-bell mr-4"></i>Notifikasi</A>
                 <A href="/keranjang" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-basket-shopping mr-4"></i>Keranjang</A>
-                <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-cart-shopping mr-4"></i>Pembelian</A>
+                <A href="/pembelian" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-cart-shopping mr-4"></i>Pembelian</A>
                 <A href="/layanan" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center hover:bg-gray-100"><i class="fa-solid fa-user-tie mr-4"></i>Layanan</A>
                 <A href="" onClick={() => setIsOpen2(!isOpen2())} class="w-full px-8 py-3 text-sm flex items-center border-t border-gray-200 hover:bg-gray-100"><i class="fa-solid fa-right-from-bracket mr-4"></i>Keluar akun</A>
               </div>
